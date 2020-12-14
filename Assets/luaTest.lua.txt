@@ -1,9 +1,0 @@
-function start()
-	print("lua start...")
-    
-	print(Gamanager:GetComponent("GameManager").rootMassageNode:AttachEventListener(666, self))
-	
-	print(Gamanager:GetComponent("GameManager").rootMassageNode:SendEvent(666))
-
-	print("you are sb!")
-end
