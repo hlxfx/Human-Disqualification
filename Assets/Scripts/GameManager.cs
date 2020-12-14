@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
         rootMassageNode = new MassageNode(gameObject);
-        roleManager = new RoleManager(GameObject.Find("Canvas/Image/role"));
+        //roleManager = new RoleManager(GameObject.Find("Canvas/Image/role"));
     }
     // Start is called before the first frame update
     void Start()
