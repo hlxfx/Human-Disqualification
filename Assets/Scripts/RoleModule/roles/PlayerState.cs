@@ -14,13 +14,19 @@ public enum State
 [Serializable]
 public class PlayerState :IScript
 {
+    public const float maxRunTime = 5f;
+
     [SerializeField]
     private Animator ani;
     private GameObject gameObject;
     [SerializeField]
     private State _state;
     [SerializeField]
-    private float deltaSpeed = .8f;    //每秒速度的变化量
+    private float deltaSpeed = .6f;    //每秒速度的变化量
+    public bool canRun = true;
+    public float runTime = maxRunTime;
+    public float runRestTime = 3f;
+    public float runSpeed = 1.5f;      //为普通速度的多少倍
 
 
     public PlayerState(GameObject gameObject)
@@ -62,30 +68,60 @@ public class PlayerState :IScript
         float v = Input.GetAxis("Vertical");
         if (h != 0 || v != 0)
         {
-            if (!ani.GetBool("IsMove"))  //停止后重新进入先置零方向
+            if (!ani.GetBool("IsMove"))  //停止后重新进入先置速度矢量为0
             {
                 ani.SetFloat("ValX", 0);
                 ani.SetFloat("ValY", 0);
             }
+
             ani.SetBool("IsMove", true);
             ani.SetFloat("ValX", h * deltaSpeed, .5f, Time.deltaTime);
             ani.SetFloat("ValY", v * deltaSpeed, .5f, Time.deltaTime);
-            MovePos(new Vector3(ani.GetFloat("ValX"), ani.GetFloat("ValY"), 0));
+
+            if (Input.GetKey(KeyCode.LeftShift) && canRun)
+            {
+                Run();
+            }
+            else
+            {
+                if(!canRun || runTime < maxRunTime)
+                {
+                    rest();
+                }
+                MovePos(new Vector3(ani.GetFloat("ValX"), ani.GetFloat("ValY"), 0));
+            }
         }
         else
         {
+            rest();
             ani.SetBool("IsMove", false);
+        }
+    }
+
+    private void Run()
+    {
+        MovePos(new Vector3(ani.GetFloat("ValX"), ani.GetFloat("ValY"), 0) * runSpeed);
+        runTime -= Time.deltaTime;
+        Debug.Log(runTime);
+
+        if (runTime < 0)
+        {
+            canRun = false;
+        }
+    }
+
+    private void rest()
+    {
+        runTime += maxRunTime / runRestTime * Time.deltaTime;
+        if(runTime > maxRunTime)
+        {
+            canRun = true;
+            runTime = maxRunTime;
         }
     }
 
     private void MovePos(Vector3 dir)
     {
-        if(Math.Abs(dir.x) > .6f || Math.Abs(dir.y) > .6f)
-        {
-            //后续增加奔跑计时，  加上跑步冷却
-            dir.x = Math.Min(dir.x, .6f);
-            dir.y = Math.Min(dir.y, .6f);
-        }
         gameObject.transform.position += dir * Time.deltaTime;
     }
     public bool SetState(State state)
