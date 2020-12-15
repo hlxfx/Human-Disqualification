@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public MassageNode rootMassageNode;
     public RoleManager roleManager;
+    public MapManager mapManager;
 
     private void Awake()
     {
@@ -14,9 +15,16 @@ public class GameManager : MonoBehaviour
             Destroy(instance);
         }
         instance = this;
-        rootMassageNode = new MassageNode(gameObject);
-        roleManager = new RoleManager(GameObject.Find("Canvas/Image/role"));
+        InitGmae();  //无存档时调用
     }
+
+    private void InitGmae()
+    {
+        rootMassageNode = new MassageNode(gameObject);
+        mapManager = new MapManager(GameObject.Find("Canvas/map"));
+        roleManager = new RoleManager(GameObject.Find("Canvas/map/role"));
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -1,0 +1,20 @@
+{
+    "MapDatas": [
+        {
+            "mapName": "elevator",
+            "mapID": 0,
+            "itemList": [
+                {
+                    "isShow": true,
+                    "itemName": "Elevator_paper",
+                    "isTrigger": true
+                },
+                {
+                    "isShow": true,
+                    "itemName": "Elevator_phone",
+                    "isTrigger": true
+                }
+            ]
+        }
+    ]
+}

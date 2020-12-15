@@ -8,21 +8,37 @@ public class RoleManager : IScript
 {
     [SerializeField]
     private PlayerManager playerManager;
+    private GameObject gameObject;
+    public bool haveRole;
     
     public RoleManager(GameObject gameObject)
+    {
+        this.gameObject = gameObject;
+        haveRole = false;
+    }
+
+    public void LoadRole()
     {
         playerManager = new PlayerManager(gameObject);
     }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// 从存档中读取数据后需进行的初始化
+    /// </summary>
     public void Start()
     {
-        playerManager.Start();
+        if (haveRole)
+        {
+            playerManager.Start();
+        }
     }
 
     // Update is called once per frame
     public void Update()
     {
-        playerManager.Update();
+        if (haveRole)
+        {
+            playerManager.Update();
+        }
     }
 }

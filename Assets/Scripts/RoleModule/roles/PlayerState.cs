@@ -26,7 +26,7 @@ public class PlayerState :IScript
     public bool canRun = true;
     public float runTime = maxRunTime;
     public float runRestTime = 3f;
-    public float runSpeed = 1.5f;      //为普通速度的多少倍
+    public float runSpeed = 2.5f;      //为普通速度的多少倍
 
 
     public PlayerState(GameObject gameObject)
@@ -64,8 +64,8 @@ public class PlayerState :IScript
 
     private void OnMove()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h = GameInput.GetAxis("Horizontal");
+        float v = GameInput.GetAxis("Vertical");
         if (h != 0 || v != 0)
         {
             if (!ani.GetBool("IsMove"))  //停止后重新进入先置速度矢量为0
@@ -78,7 +78,7 @@ public class PlayerState :IScript
             ani.SetFloat("ValX", h * deltaSpeed, .5f, Time.deltaTime);
             ani.SetFloat("ValY", v * deltaSpeed, .5f, Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.LeftShift) && canRun)
+            if (GameInput.GetKey(KeyCode.LeftShift) && canRun)
             {
                 Run();
             }
