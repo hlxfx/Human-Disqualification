@@ -21,7 +21,7 @@ public class MapManager
         allMaps = new Dictionary<int, List<MapBase>>();
         mapDataList = MapMassageFromJson.LoadMapDataJson("MapData");
 
-        LoadMap(0);
+        LoadMap(70001);
     }
     
 

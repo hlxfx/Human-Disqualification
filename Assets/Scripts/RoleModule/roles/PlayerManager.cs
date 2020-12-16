@@ -9,10 +9,11 @@ public class PlayerManager : IScript
 {
     [SerializeField]
     private PlayerState playerMove;
+    private GameObject player;
 
     public PlayerManager(GameObject gameObject)
     {
-        GameObject player =  Resources.Load<GameObject>("prefabs/player");
+        player =  Resources.Load<GameObject>("prefabs/player");
         player = GameObject.Instantiate(player) as GameObject;
         player.transform.SetParent(gameObject.transform);
         player.GetComponent<SpriteRenderer>().sortingOrder = 9;
@@ -29,5 +30,10 @@ public class PlayerManager : IScript
     public void Update()
     {
         playerMove.Update();
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
     }
 }

@@ -15,11 +15,18 @@ public class RoleManager : IScript
     {
         this.gameObject = gameObject;
         haveRole = false;
+        LoadRole();
     }
 
     public void LoadRole()
     {
         playerManager = new PlayerManager(gameObject);
+        haveRole = true;
+    }
+
+    public  GameObject GetPlayer()
+    {
+        return playerManager.GetPlayer();
     }
 
     /// <summary>

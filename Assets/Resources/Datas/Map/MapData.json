@@ -15,6 +15,13 @@
                     "isTrigger": true
                 }
             ]
+        },
+        {
+            "mapName": "sevenFloor",
+            "mapID": 70001,
+            "itemList": [
+                
+            ]
         }
     ]
 }
