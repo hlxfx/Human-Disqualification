@@ -25,7 +25,7 @@ public class MapBase
         mapName = mapData.mapName;
         items = mapData.itemList;
 
-        GameObject map = Instantiate("prefabs/mapBase");
+        GameObject map = Instantiate("prefabs/map/"+ mapName);
         map.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("pic/map/" + mapName);
         map.transform.SetParent(gameObject.transform);
 
