@@ -8,28 +8,29 @@ using System;
 public class PlayerManager : IScript
 {
     [SerializeField]
-    private PlayerState playerMove;
+    private PlayerState playerState;
     private GameObject player;
 
     public PlayerManager(GameObject gameObject)
     {
-        player =  Resources.Load<GameObject>("prefabs/player");
+        player =  Resources.Load<GameObject>("prefabs/player/player");
         player = GameObject.Instantiate(player) as GameObject;
         player.transform.SetParent(gameObject.transform);
         player.GetComponent<SpriteRenderer>().sortingOrder = 9;
-        playerMove = new PlayerState(player);
+        player.AddComponent<ColliderEvent>();
+        playerState = new PlayerState(player);
     }
 
     // Start is called before the first frame update
     public void Start()
     {
-        playerMove.Start();
+        playerState.Start();
     }
 
     // Update is called once per frame
     public void Update()
     {
-        playerMove.Update();
+        playerState.Update();
     }
 
     public GameObject GetPlayer()

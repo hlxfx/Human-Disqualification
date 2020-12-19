@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &370791373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 1.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -375,16 +375,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleManager:
     playerManager:
-      playerMove:
+      playerState:
         ani: {fileID: 0}
         _state: 0
-        deltaSpeed: 0
-        canRun: 0
-        runTime: 0
-        runRestTime: 0
-        runSpeed: 0
+        moveState:
+          deltaSpeed: 0.6
+          canRun: 1
+          runTime: 5
+          runRestTime: 3
+          runSpeed: 2.5
     haveRole: 0
   mapManager:
+    allMaps: []
     curMap:
       mapID: 0
       mapName: 
@@ -392,6 +394,10 @@ MonoBehaviour:
       itemObjects: []
     mapDataList:
       MapDatas: []
+  cameraMove:
+    camera: {fileID: 0}
+    target: {fileID: 0}
+    light: {fileID: 0}
 --- !u!4 &1044377266
 Transform:
   m_ObjectHideFlags: 0

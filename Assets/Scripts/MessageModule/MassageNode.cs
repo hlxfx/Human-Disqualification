@@ -127,7 +127,7 @@ public class MassageNode
         return false;
     }
 
-    public void SendEvent(int key, object param1 = null, object param2 = null)
+    public void SendEvent(int key, string param1 = null, GameObject param2 = null)
     {
         DispatchEvent(key, param1, param2);
     }
@@ -139,7 +139,7 @@ public class MassageNode
     /// <param name="param1"></param>
     /// <param name="param2"></param>
     /// <returns>如果中断消息返回true</returns>
-    private bool DispatchEvent(int key, object param1, object param2)
+    private bool DispatchEvent(int key, string param1, GameObject param2)
     {
         for (int i = 0; i < mNodeList.Count; i++)
         {
@@ -156,7 +156,7 @@ public class MassageNode
     /// <param name="param1"></param>
     /// <param name="param2"></param>
     /// <returns>是否中断</returns>
-    private bool TriggerEvent(int key, object param1, object param2)
+    private bool TriggerEvent(int key, string param1, GameObject param2)
     {
         if (!gameObject.activeSelf || !gameObject.activeInHierarchy || (gameObject.GetComponent<Renderer>() && !gameObject.GetComponent<Renderer>().enabled))
         {

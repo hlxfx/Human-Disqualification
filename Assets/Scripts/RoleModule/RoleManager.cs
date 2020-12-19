@@ -37,7 +37,12 @@ public class RoleManager : IScript
         if (haveRole)
         {
             playerManager.Start();
+
+            //存档中的位置，或初始位置
+            GameManager.instance.rootMassageNode.SendEvent(MassageList.ChangeMap, "Floor_1");
         }
+
+
     }
 
     // Update is called once per frame

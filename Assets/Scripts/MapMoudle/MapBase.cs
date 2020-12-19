@@ -6,7 +6,7 @@ using System;
 [Serializable]
 public class MapBase
 {
-    private GameObject gameObject;
+    private GameObject map;
 
     /// <summary>
     /// mapID / 10000 = 当前层数   每层预留1W个小房间
@@ -19,13 +19,12 @@ public class MapBase
 
     public MapBase(GameObject gameObject, MapData mapData)
     {
-        this.gameObject = gameObject;
         itemObjects = new List<GameObject>();
         mapID = mapData.mapID;
         mapName = mapData.mapName;
         items = mapData.itemList;
 
-        GameObject map = Instantiate("prefabs/map/"+ mapName);
+        map = Instantiate("prefabs/map/"+ mapName);
         map.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("pic/map/" + mapName);
         map.transform.SetParent(gameObject.transform);
 
@@ -47,4 +46,8 @@ public class MapBase
         return temp;
     }
 
+    public GameObject GetMapObject()
+    {
+        return map;
+    }
 }

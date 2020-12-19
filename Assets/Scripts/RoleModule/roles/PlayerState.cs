@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum State
+public enum States
 {
     move,
     attack,
@@ -14,25 +14,30 @@ public enum State
 [Serializable]
 public class PlayerState :IScript
 {
-    public const float maxRunTime = 5f;
-
+   
     [SerializeField]
     private Animator ani;
     private GameObject gameObject;
     [SerializeField]
-    private State _state;
+    private States _state;
+    public State curState;
+
     [SerializeField]
-    private float deltaSpeed = .6f;    //每秒速度的变化量
-    public bool canRun = true;
-    public float runTime = maxRunTime;
-    public float runRestTime = 3f;
-    public float runSpeed = 2.5f;      //为普通速度的多少倍
+    private MoveState moveState;
+    private AttackState attackState;
+    private DieState dieState;
+    private InjuredState injuredState;
 
 
     public PlayerState(GameObject gameObject)
     {
         this.gameObject = gameObject;
-        _state = State.move;
+        moveState = new MoveState();
+        attackState = new AttackState();
+        dieState = new DieState();
+        injuredState = new InjuredState();
+        SetState(States.move);
+        curState = moveState;
     }
 
     public void Start()
@@ -47,90 +52,32 @@ public class PlayerState :IScript
         }
         else if (ani)
         {
-            switch (_state)
-            {
-                case State.move:
-                    OnMove();
-                    break;
-                case State.attack:
-                    break;
-                case State.injured:
-                    break;
-                case State.die:
-                    break;
-            }
+            curState.Update(ani);
         }
     }
 
-    private void OnMove()
-    {
-        float h = GameInput.GetAxis("Horizontal");
-        float v = GameInput.GetAxis("Vertical");
-        if (h != 0 || v != 0)
-        {
-            if (!ani.GetBool("IsMove"))  //停止后重新进入先置速度矢量为0
-            {
-                ani.SetFloat("ValX", 0);
-                ani.SetFloat("ValY", 0);
-            }
-
-            ani.SetBool("IsMove", true);
-            ani.SetFloat("ValX", h * deltaSpeed, .5f, Time.deltaTime);
-            ani.SetFloat("ValY", v * deltaSpeed, .5f, Time.deltaTime);
-
-            if (GameInput.GetKey(KeyCode.LeftShift) && canRun)
-            {
-                Run();
-            }
-            else
-            {
-                if(!canRun || runTime < maxRunTime)
-                {
-                    rest();
-                }
-                MovePos(new Vector3(ani.GetFloat("ValX"), ani.GetFloat("ValY"), 0));
-            }
-        }
-        else
-        {
-            rest();
-            ani.SetBool("IsMove", false);
-        }
-    }
-
-    private void Run()
-    {
-        MovePos(new Vector3(ani.GetFloat("ValX"), ani.GetFloat("ValY"), 0) * runSpeed);
-        runTime -= Time.deltaTime;
-        Debug.Log(runTime);
-
-        if (runTime < 0)
-        {
-            canRun = false;
-        }
-    }
-
-    private void rest()
-    {
-        runTime += maxRunTime / runRestTime * Time.deltaTime;
-        if(runTime > maxRunTime)
-        {
-            canRun = true;
-            runTime = maxRunTime;
-        }
-    }
-
-    private void MovePos(Vector3 dir)
-    {
-        gameObject.transform.position += dir * Time.deltaTime;
-    }
-    public bool SetState(State state)
+    public bool SetState(States state)
     {
         _state = state;
+        switch (_state)
+        {
+            case States.move:
+                curState = moveState;
+                break;
+            case States.attack:
+                curState = attackState;
+                break;
+            case States.die:
+                curState = dieState;
+                break;
+            case States.injured:
+                curState = injuredState;
+                break;
+        }
         return true;
     }
 
-    public State GetState(State state)
+    public States GetState(States state)
     {
         return _state;
     }

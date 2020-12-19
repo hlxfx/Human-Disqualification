@@ -7,13 +7,13 @@ public class Example_1 : MonoBehaviour, IMassageInterface
 
     private void Awake()
     {
-        //GameManager.rootMassageNode.AttachEventListener(666, this);
+        GameManager.instance.rootMassageNode.AttachEventListener(666, this);
     }
     // Start is called before the first frame update
     void Start()
     {
-        //GameManager.rootMassageNode.SendEvent(MassageList.example_1);
-        //GameManager.rootMassageNode.SendEvent(666);
+        GameManager.instance.rootMassageNode.SendEvent(MassageList.example_1);
+        GameManager.instance.rootMassageNode.SendEvent(666);
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class Example_1 : MonoBehaviour, IMassageInterface
         
     }
 
-    public bool HandleMessage(int id, object param1, object param2)
+    public bool HandleMessage(int id, string param1, GameObject param2)
     {
 
         if(id == 666)

@@ -17,5 +17,21 @@ public static class GameInput
         return axis;
     }
 
+    public static Vector3 GetMousePos()
+    {
+        return Input.mousePosition;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="btn">0 左键   1 右键   2 滚轮</param>
+    /// <returns></returns>
+
+    public static bool GetMouseBtn(int btn)
+    {
+        return Input.GetMouseButton(btn);
+    }
+
 
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class MapManager 
+public class MapManager :IMassageInterface
 {
     private GameObject gameObject;
     /// <summary>
     /// int为层，list为层内所有的地图
     /// </summary>
-    public Dictionary<int,List<MapBase>> allMaps;
+    public List<MapBase> allMaps;
     public MapBase curMap;
     public MapDataList mapDataList;
 
@@ -18,36 +18,54 @@ public class MapManager
     public MapManager(GameObject gameObject)
     {
         this.gameObject = gameObject;
-        allMaps = new Dictionary<int, List<MapBase>>();
+        allMaps = new List<MapBase>();
         mapDataList = MapMassageFromJson.LoadMapDataJson("MapData");
-
-        LoadMap(70001);
+        GameManager.instance.rootMassageNode.AttachEventListener(MassageList.ChangeMap, this);
     }
     
-
-    /// <summary>
-    /// 加载某一层的地图
-    /// </summary>
-    public void LoadMap(int mapID)
+    public void LoadMap(string mapName)
     {
-        int floor = mapID / 10000;
-        int roomNum = mapID % 10000;
-        MapData mapdate = mapDataList.MapDatas.Find(v => v.mapID == mapID);
-
-        curMap = new MapBase(gameObject, mapdate);
+        MapBase map = allMaps.Find(v => v.mapName == mapName);
+        if (map == null)
+        {
+            MapData mapdate = mapDataList.MapDatas.Find(v => v.mapName == mapName);
+            if(curMap!= null) curMap.GetMapObject().SetActive(false);
+            curMap = new MapBase(gameObject, mapdate);
+            allMaps.Add(curMap);
+        }
+        else
+        {
+            curMap.GetMapObject().SetActive(false);
+            curMap = map;
+            curMap.GetMapObject().SetActive(true);
+        }
     }
 
 
-    /// <summary>
-    /// 加载层内的子地图
-    /// </summary>
-    /// <param name="floor">层</param>
-    public void LoadChildMap(GameObject floor,int mapID)
+    public bool HandleMessage(int id, string mapName, GameObject param2)
     {
-
+        if (mapName != null)
+        {
+            LoadMap(mapName);
+        }
+        if(id == MassageList.ChangeMap)
+        {
+            Transform transform = RoleInterface.GetPlayer().transform;
+            Set2RootPos(transform);
+            CameraInterface.SetCameraPos(transform.position);
+        }
+        return false;
     }
 
+    private void Set2RootPos(Transform target)
+    {
+        target.position = curMap.GetMapObject().transform.Find("rootPos").position;
+    }
 
+    public int MessagePriority()
+    {
+        return 1;
+    }
 
     // Update is called once per frame
     public void Update()

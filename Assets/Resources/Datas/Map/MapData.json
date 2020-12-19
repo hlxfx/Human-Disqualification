@@ -17,10 +17,24 @@
             ]
         },
         {
-            "mapName": "sevenFloor",
-            "mapID": 70001,
+            "mapName": "Floor_1",
+            "mapID": 10001,
             "itemList": [
-                
+
+            ]
+        },
+        {
+            "mapName": "teaRoom",
+            "mapID": 10002,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "toiletRoom",
+            "mapID": 10003,
+            "itemList": [
+
             ]
         }
     ]
