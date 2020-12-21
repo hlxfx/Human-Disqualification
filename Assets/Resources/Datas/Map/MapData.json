@@ -36,6 +36,20 @@
             "itemList": [
 
             ]
+        },
+        {
+            "mapName": "maleToiletRoom",
+            "mapID": 10004,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "famaleToiletRoom",
+            "mapID": 10005,
+            "itemList": [
+
+            ]
         }
     ]
 }

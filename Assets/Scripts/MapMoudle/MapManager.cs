@@ -14,13 +14,17 @@ public class MapManager :IMassageInterface
     public MapBase curMap;
     public MapDataList mapDataList;
 
+    private Stack<Vector3> doorPos; //进入新房间后，记录之前的门的pos,用于出房间时setPos
+
 
     public MapManager(GameObject gameObject)
     {
         this.gameObject = gameObject;
         allMaps = new List<MapBase>();
         mapDataList = MapMassageFromJson.LoadMapDataJson("MapData");
-        GameManager.instance.rootMassageNode.AttachEventListener(MassageList.ChangeMap, this);
+        GameManager.instance.rootMassageNode.AttachEventListener(MassageList.EnterMap, this);
+        GameManager.instance.rootMassageNode.AttachEventListener(MassageList.OutMap, this);
+        doorPos = new Stack<Vector3>();
     }
     
     public void LoadMap(string mapName)
@@ -29,6 +33,11 @@ public class MapManager :IMassageInterface
         if (map == null)
         {
             MapData mapdate = mapDataList.MapDatas.Find(v => v.mapName == mapName);
+            if (mapdate == null)
+            {
+                Debug.LogError("该地图信息不存在");
+                return;
+            }
             if(curMap!= null) curMap.GetMapObject().SetActive(false);
             curMap = new MapBase(gameObject, mapdate);
             allMaps.Add(curMap);
@@ -48,18 +57,31 @@ public class MapManager :IMassageInterface
         {
             LoadMap(mapName);
         }
-        if(id == MassageList.ChangeMap)
+        if(id == MassageList.EnterMap)
         {
             Transform transform = RoleInterface.GetPlayer().transform;
-            Set2RootPos(transform);
+            SetPos(transform,true);
+            CameraInterface.SetCameraPos(transform.position);
+        }else if(id == MassageList.OutMap)
+        {
+            Transform transform = RoleInterface.GetPlayer().transform;
+            SetPos(transform,false);
             CameraInterface.SetCameraPos(transform.position);
         }
         return false;
     }
 
-    private void Set2RootPos(Transform target)
+    private void SetPos(Transform target,bool enter)
     {
-        target.position = curMap.GetMapObject().transform.Find("rootPos").position;
+        if (enter)
+        {
+            doorPos.Push(target.position);
+            target.position = curMap.GetMapObject().transform.Find("rootPos").position;
+        }
+        else
+        {
+            target.position = doorPos.Pop();
+        }
     }
 
     public int MessagePriority()

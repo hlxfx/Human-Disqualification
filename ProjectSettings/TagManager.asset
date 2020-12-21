@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - door
+  - outDoor
+  - enterDoor
   layers:
   - Default
   - TransparentFX

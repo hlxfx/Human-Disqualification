@@ -39,7 +39,7 @@ public class RoleManager : IScript
             playerManager.Start();
 
             //存档中的位置，或初始位置
-            GameManager.instance.rootMassageNode.SendEvent(MassageList.ChangeMap, "Floor_1");
+            GameManager.instance.rootMassageNode.SendEvent(MassageList.EnterMap, "Floor_1");
         }
 
 

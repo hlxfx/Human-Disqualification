@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Example_1 : MonoBehaviour, IMassageInterface
 {
-
+    test test;
     private void Awake()
     {
+        test = new test();
         GameManager.instance.rootMassageNode.AttachEventListener(666, this);
     }
     // Start is called before the first frame update
@@ -41,5 +43,22 @@ public class Example_1 : MonoBehaviour, IMassageInterface
     {
 
         return 1;
+    }
+}
+
+public class test
+{
+    public test() {
+        init(test1);
+    }
+
+    public void init(Action test)
+    {
+        test?.Invoke();
+    }
+
+    public void test1()
+    {
+        Debug.Log("ssss");
     }
 }
