@@ -14,7 +14,6 @@ public class MapManager :IMassageInterface
     public MapBase curMap;
     public MapDataList mapDataList;
 
-    private Stack<Vector3> doorPos; //进入新房间后，记录之前的门的pos,用于出房间时setPos
 
 
     public MapManager(GameObject gameObject)
@@ -22,9 +21,7 @@ public class MapManager :IMassageInterface
         this.gameObject = gameObject;
         allMaps = new List<MapBase>();
         mapDataList = MapMassageFromJson.LoadMapDataJson("MapData");
-        GameManager.instance.rootMassageNode.AttachEventListener(MassageList.EnterMap, this);
-        GameManager.instance.rootMassageNode.AttachEventListener(MassageList.OutMap, this);
-        doorPos = new Stack<Vector3>();
+        GameManager.instance.rootMassageNode.AttachEventListener(MassageList.loadMap, this);
     }
     
     public void LoadMap(string mapName)
@@ -57,30 +54,24 @@ public class MapManager :IMassageInterface
         {
             LoadMap(mapName);
         }
-        if(id == MassageList.EnterMap)
+        if(id == MassageList.loadMap)
         {
             Transform transform = RoleInterface.GetPlayer().transform;
-            SetPos(transform,true);
-            CameraInterface.SetCameraPos(transform.position);
-        }else if(id == MassageList.OutMap)
-        {
-            Transform transform = RoleInterface.GetPlayer().transform;
-            SetPos(transform,false);
+            SetPos(transform, param2);
             CameraInterface.SetCameraPos(transform.position);
         }
         return false;
     }
 
-    private void SetPos(Transform target,bool enter)
+    private void SetPos(Transform target,GameObject door)
     {
-        if (enter)
+        if (door != null)
         {
-            doorPos.Push(target.position);
-            target.position = curMap.GetMapObject().transform.Find("rootPos").position;
+            target.position = door.transform.Find("desPos").position;
         }
         else
         {
-            target.position = doorPos.Pop();
+            target.position = curMap.GetMapObject().transform.Find("rootPos").position;
         }
     }
 

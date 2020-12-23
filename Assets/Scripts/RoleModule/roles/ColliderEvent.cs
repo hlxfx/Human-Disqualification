@@ -6,15 +6,9 @@ public class ColliderEvent : MonoBehaviour
 {
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		if (coll.transform.tag == "enterDoor")
+		if (coll.transform.tag == "door")
 		{
-			GameManager.instance.rootMassageNode.SendEvent(MassageList.EnterMap, coll.gameObject.name,coll.gameObject);
-			return;
-		}
-
-		if (coll.transform.tag == "outDoor")
-        {
-			GameManager.instance.rootMassageNode.SendEvent(MassageList.OutMap, coll.gameObject.name);
+			GameManager.instance.rootMassageNode.SendEvent(MassageList.loadMap, coll.gameObject.name,coll.gameObject);
 			return;
 		}
 	}
