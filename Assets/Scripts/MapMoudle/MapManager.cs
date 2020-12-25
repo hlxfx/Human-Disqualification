@@ -7,21 +7,21 @@ using System;
 public class MapManager :IMassageInterface
 {
     private GameObject gameObject;
-    /// <summary>
-    /// int为层，list为层内所有的地图
-    /// </summary>
-    public List<MapBase> allMaps;
     public MapBase curMap;
     public MapDataList mapDataList;
+    public GridMap gridMap;
 
-
+    public List<MapBase> allMaps;
+    private GameObject gridParent;
 
     public MapManager(GameObject gameObject)
     {
         this.gameObject = gameObject;
         allMaps = new List<MapBase>();
+        gridMap = new GridMap();
         mapDataList = MapMassageFromJson.LoadMapDataJson("MapData");
         GameManager.instance.rootMassageNode.AttachEventListener(MassageList.loadMap, this);
+        gridParent = GameObject.Find("Grid");
     }
     
     public void LoadMap(string mapName)
@@ -29,13 +29,18 @@ public class MapManager :IMassageInterface
         MapBase map = allMaps.Find(v => v.mapName == mapName);
         if (map == null)
         {
+
             MapData mapdate = mapDataList.MapDatas.Find(v => v.mapName == mapName);
             if (mapdate == null)
             {
                 Debug.LogError("该地图信息不存在");
                 return;
             }
-            if(curMap!= null) curMap.GetMapObject().SetActive(false);
+
+            if (curMap != null) 
+            {
+                curMap.GetMapObject().SetActive(false);
+            }
             curMap = new MapBase(gameObject, mapdate);
             allMaps.Add(curMap);
         }
@@ -45,8 +50,13 @@ public class MapManager :IMassageInterface
             curMap = map;
             curMap.GetMapObject().SetActive(true);
         }
-    }
+        //curMap.GetMapObject().transform.position = curMap.GetMapObject().transform.position;
 
+        //生成格子地图,用于寻路
+        float temp = curMap.GetMapObject().GetComponent<SpriteRenderer>().sprite.rect.width / 16;
+        float temp2 = curMap.GetMapObject().GetComponent<SpriteRenderer>().sprite.rect.height / 16;
+        gridMap.CreatGrid(Convert.ToInt32(temp), Convert.ToInt32(temp2), gridParent.transform);
+    }
 
     public bool HandleMessage(int id, string mapName, GameObject param2)
     {
@@ -54,7 +64,7 @@ public class MapManager :IMassageInterface
         {
             LoadMap(mapName);
         }
-        if(id == MassageList.loadMap)
+        if (id == MassageList.loadMap)
         {
             Transform transform = RoleInterface.GetPlayer().transform;
             SetPos(transform, param2);
@@ -63,7 +73,12 @@ public class MapManager :IMassageInterface
         return false;
     }
 
-    private void SetPos(Transform target,GameObject door)
+    public int MessagePriority()
+    {
+        return 1;
+    }
+
+    private void SetPos(Transform target, GameObject door)
     {
         if (door != null)
         {
@@ -73,11 +88,6 @@ public class MapManager :IMassageInterface
         {
             target.position = curMap.GetMapObject().transform.Find("rootPos").position;
         }
-    }
-
-    public int MessagePriority()
-    {
-        return 1;
     }
 
     // Update is called once per frame

@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
 
     private void InitGmae()
     {
+        cameraMove = new CameraMove();
         rootMassageNode = new MassageNode(gameObject);
         mapManager = new MapManager(GameObject.Find("Canvas/map"));
         roleManager = new RoleManager(GameObject.Find("Canvas/map/role"));
-        cameraMove = new CameraMove();
     }
 
     // Start is called before the first frame update

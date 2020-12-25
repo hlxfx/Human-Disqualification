@@ -8,4 +8,9 @@ public static class CameraInterface
     {
         GameManager.instance.cameraMove.SetCameraPos(pos);
     }
+
+    public static bool SetTarget(Transform transform)
+    {
+        return GameManager.instance.cameraMove.ChangeTarget(transform);
+    }
 }
