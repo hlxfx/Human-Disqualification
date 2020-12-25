@@ -11,6 +11,7 @@ public class GridMap
     public List<Grid> grids = new List<Grid>();
     public float gridSize = 0.16f;
     private Object gridPrefab;
+    private Vector3 offset;
 
     public GridMap()
     {
@@ -19,7 +20,7 @@ public class GridMap
 
     public void CreatGrid(int mapW, int mapH ,Transform parent)
     {
-        
+        offset = new Vector3(mapW / 2 * gridSize, mapH / 2 * gridSize, 0);
         ClearGrids();
         int temp = 0;
         for (int x = 0; x < mapW; x++)
@@ -34,7 +35,7 @@ public class GridMap
                 {
                     grids[temp].gameObject.SetActive(true);
                 }
-                grids[temp].SetPos(new Vector3(gridSize * x, gridSize * y, gridSize * 0) + new Vector3(gridSize / 2, gridSize / 2, 0), parent);
+                grids[temp].SetPos(new Vector3(gridSize * x, gridSize * y, gridSize * 0) + new Vector3(gridSize / 2, gridSize / 2, 0) - offset, parent);
                 temp++;
             }
         }
