@@ -52,10 +52,14 @@ public class MapManager :IMassageInterface
         }
         //curMap.GetMapObject().transform.position = curMap.GetMapObject().transform.position;
 
-        //生成格子地图,用于寻路
+
+        //**************生成格子地图,用于寻路
         float temp = curMap.GetMapObject().GetComponent<SpriteRenderer>().sprite.rect.width / 16;
         float temp2 = curMap.GetMapObject().GetComponent<SpriteRenderer>().sprite.rect.height / 16;
-        gridMap.CreatGrid(Convert.ToInt32(temp), Convert.ToInt32(temp2), gridParent.transform);
+        //获取障碍物/不可走区域
+        BoxCollider2D[] obstacle = curMap.GetMapObject().GetComponentsInChildren<BoxCollider2D>();
+        gridMap.CreatGrid(Convert.ToInt32(temp), Convert.ToInt32(temp2), gridParent.transform, obstacle);
+        //**************
     }
 
     public bool HandleMessage(int id, string mapName, GameObject param2)

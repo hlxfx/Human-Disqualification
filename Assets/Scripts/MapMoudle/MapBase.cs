@@ -6,11 +6,8 @@ using System;
 [Serializable]
 public class MapBase
 {
-    private GameObject map;
+    public GameObject map;
 
-    /// <summary>
-    /// mapID / 10000 = 当前层数   每层预留1W个小房间
-    /// </summary>
     public int mapID;
     public string mapName;
 
