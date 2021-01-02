@@ -37,7 +37,7 @@ public class MapManager :IMassageInterface
                 return;
             }
 
-            if (curMap != null) 
+            if (curMap != null && curMap.GetMapObject()!= null) 
             {
                 curMap.GetMapObject().SetActive(false);
             }
@@ -58,7 +58,7 @@ public class MapManager :IMassageInterface
         float temp2 = curMap.GetMapObject().GetComponent<SpriteRenderer>().sprite.rect.height / 16;
         //获取障碍物/不可走区域
         BoxCollider2D[] obstacle = curMap.GetMapObject().GetComponentsInChildren<BoxCollider2D>();
-        gridMap.CreatGrid(Convert.ToInt32(temp), Convert.ToInt32(temp2), gridParent.transform, obstacle);
+        gridMap.CreatGrid((int)temp, (int)temp2, gridParent.transform, obstacle);
         //**************
     }
 
@@ -92,6 +92,11 @@ public class MapManager :IMassageInterface
         {
             target.position = curMap.GetMapObject().transform.Find("rootPos").position;
         }
+    }
+
+    public List<Vector3> FindPath(Vector3 start, Vector3 end)
+    {
+        return gridMap.CalculateRoad(start, end);
     }
 
     // Update is called once per frame
