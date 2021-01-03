@@ -22,10 +22,18 @@ public class TestManeger : MonoBehaviour
         {
             player = RoleInterface.GetPlayer();
             List<Vector3> temp = MapInterface.FindPath(player.transform.position, Camera.main.ScreenToWorldPoint(GameInput.GetMousePos()));
-            foreach (var item in temp)
-            {
-                Debug.Log(item);
-            }
+            StopAllCoroutines();
+            StartCoroutine(GoPathTest(temp));
+        }
+    }
+
+    private IEnumerator GoPathTest(List<Vector3> path)
+    {
+        if (path == null) yield break;
+        foreach (var item in path)
+        {
+            player.transform.position = item;
+            yield return new WaitForSeconds(.2f);
         }
     }
 

@@ -38,7 +38,7 @@ public class GridMap
             {
                 if(grids.Count < temp + 1)
                 {
-                    grids.Add(new Grid(GameObject.Instantiate(gridPrefab) as GameObject));
+                    grids.Add(new Grid(GameObject.Instantiate(gridPrefab) as GameObject , temp));
                 }
                 else
                 {
@@ -111,22 +111,22 @@ public class GridMap
         while (true)
         {
             //寻找周围的点
-            //左上    startNum - startX*curMapH + 1
-            FindNearNode2OpenList(startNum - startX * curMapH + 1, 1.4f, grids[startNum], grids[targetNum]);
+            //左上    startNum - curMapH + 1
+            FindNearNode2OpenList(startNum - curMapH + 1, gridSize * 1.4f, grids[startNum], grids[targetNum]);
             //上      startNum + 1
-            FindNearNode2OpenList(startNum + 1, 1f, grids[startNum], grids[targetNum]);
-            //右上    startNum + startX*curMapH + 1
-            FindNearNode2OpenList(startNum + startX * curMapH + 1, 1.4f, grids[startNum], grids[targetNum]);
-            //左      startNum - startX*curMapH
-            FindNearNode2OpenList(startNum - startX * curMapH, 1f, grids[startNum], grids[targetNum]);
-            //右      startNum + startX*curMapH
-            FindNearNode2OpenList(startNum + startX * curMapH, 1f, grids[startNum], grids[targetNum]);
-            //左下    startNum - startX*curMapH - 1
-            FindNearNode2OpenList(startNum - startX * curMapH - 1, 1.4f, grids[startNum], grids[targetNum]);
+            FindNearNode2OpenList(startNum + 1, gridSize, grids[startNum], grids[targetNum]);
+            //右上    startNum + curMapH + 1
+            FindNearNode2OpenList(startNum + curMapH + 1, gridSize * 1.4f, grids[startNum], grids[targetNum]);
+            //左      startNum - curMapH
+            FindNearNode2OpenList(startNum - curMapH, gridSize, grids[startNum], grids[targetNum]);
+            //右      startNum + curMapH
+            FindNearNode2OpenList(startNum + curMapH, gridSize, grids[startNum], grids[targetNum]);
+            //左下    startNum - curMapH - 1
+            FindNearNode2OpenList(startNum - curMapH - 1, gridSize * 1.4f, grids[startNum], grids[targetNum]);
             //下      startNum - 1
-            FindNearNode2OpenList(startNum - 1, 1f, grids[startNum], grids[targetNum]);
-            //右下    startNum + startX*curMapH - 1
-            FindNearNode2OpenList(startNum + startX * curMapH - 1, 1.4f, grids[startNum], grids[targetNum]);
+            FindNearNode2OpenList(startNum - 1, gridSize, grids[startNum], grids[targetNum]);
+            //右下    startNum + curMapH - 1
+            FindNearNode2OpenList(startNum + curMapH - 1, gridSize * 1.4f, grids[startNum], grids[targetNum]);
 
             if(openList.Count == 0)
             {
@@ -136,10 +136,7 @@ public class GridMap
             //将f值最小的格子加入关闭列表
             openList.Sort(SortOpenList);
             closeList.Add(openList[0]);
-            start = openList[0].gameObject.transform.position;
-            startX = Mathf.FloorToInt(Mathf.Abs(start.x / gridSize));
-            startY = Mathf.CeilToInt(Mathf.Abs(start.y / gridSize));
-            startNum = startX * curMapH + startY;
+            startNum = openList[0].index;
             openList.RemoveAt(0);
 
             if (startNum == targetNum)
@@ -170,16 +167,16 @@ public class GridMap
 
     private void FindNearNode2OpenList(int num, float g, Grid father, Grid endNode)
     {
-        if (grids[num].gameObject == null || !grids[num].gameObject.activeSelf)
+        if (num < 0 || grids[num].gameObject == null || !grids[num].gameObject.activeSelf)
         {
-            Debug.Log("目标点不在地图内!");
+            Debug.Log(num+ "点不在地图内");
             return;
         }
 
         //是不是阻挡点
         if (grids[num].gameObject.layer == (int)NodeType.unWalk)
         {
-            Debug.Log("目标点不可抵达!");
+            Debug.Log(num + "点是阻挡点!");
             return;
         }
 
@@ -220,11 +217,13 @@ public class Grid
     public Grid father;
     public GameObject gameObject;
     public NodeType type;
+    //格子在格子地图列表中的索引，可以用于设置为下一起点
+    public int index; 
 
-    public Grid(GameObject gameObject,Grid grid = null)
+    public Grid(GameObject gameObject, int index)
     {
         this.gameObject = gameObject;
-        father = grid;
+        this.index = index;
     }
 
     public void SetNodeType(NodeType e_NODE_TYPE)
