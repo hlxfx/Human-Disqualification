@@ -9,6 +9,8 @@ public class TestManeger : MonoBehaviour
 {
     public GameObject Grid;
     public GameObject player;
+    public GameObject target;
+    public Vector3 offset;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,19 +23,11 @@ public class TestManeger : MonoBehaviour
         if (GameInput.GetMouseBtn(1))
         {
             player = RoleInterface.GetPlayer();
-            List<Vector3> temp = MapInterface.FindPath(player.transform.position, Camera.main.ScreenToWorldPoint(GameInput.GetMousePos()));
-            StopAllCoroutines();
-            StartCoroutine(GoPathTest(temp));
-        }
-    }
-
-    private IEnumerator GoPathTest(List<Vector3> path)
-    {
-        if (path == null) yield break;
-        foreach (var item in path)
-        {
-            player.transform.position = item;
-            yield return new WaitForSeconds(.2f);
+            offset = new Vector3(player.GetComponent<BoxCollider2D>().offset.x, player.GetComponent<BoxCollider2D>().offset.y, 0f);
+            target.transform.position = Camera.main.ScreenToWorldPoint(GameInput.GetMousePos());
+            List<Vector3> path = MapInterface.FindPath(player.transform.position + offset, target.transform.position);
+            RoleInterface.SetPlayerState(States.autoMove);
+            RoleInterface.OnAutoMove(player.GetComponent<Animator>(), path);
         }
     }
 
@@ -50,4 +44,7 @@ public class TestManeger : MonoBehaviour
             Gizmos.DrawWireCube(temp[i].bounds.center, new Vector3(0.16f, 0.16f, 0));
         }
     }
+
+
+
 }

@@ -8,7 +8,7 @@ public class MoveState : State
 {
     public const float maxRunTime = 5f;
     [SerializeField]
-    private float deltaSpeed = .6f;    //每秒速度的变化量
+    private float deltaSpeed = .6f;    //每秒速度的变化量及步行时最大可达速度
     public bool canRun = true;
     public float runTime = maxRunTime;
     public float runRestTime = 3f;

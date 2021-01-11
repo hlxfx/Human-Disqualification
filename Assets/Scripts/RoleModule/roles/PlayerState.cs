@@ -6,6 +6,7 @@ using System;
 public enum States
 {
     move,
+    autoMove,
     attack,
     injured,
     die,
@@ -27,6 +28,7 @@ public class PlayerState :IScript
     private AttackState attackState;
     private DieState dieState;
     private InjuredState injuredState;
+    private AutoMoveState autoMove;
 
 
     public PlayerState(GameObject gameObject)
@@ -36,6 +38,7 @@ public class PlayerState :IScript
         attackState = new AttackState();
         dieState = new DieState();
         injuredState = new InjuredState();
+        autoMove = new AutoMoveState();
         SetState(States.move);
         curState = moveState;
     }
@@ -63,6 +66,9 @@ public class PlayerState :IScript
         {
             case States.move:
                 curState = moveState;
+                break;
+            case States.autoMove:
+                curState = autoMove;
                 break;
             case States.attack:
                 curState = attackState;

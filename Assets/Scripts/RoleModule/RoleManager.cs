@@ -29,6 +29,11 @@ public class RoleManager : IScript
         return playerManager.GetPlayer();
     }
 
+    public PlayerState GetPlayerState()
+    {
+        return playerManager.GetState();
+    }
+
     /// <summary>
     /// 从存档中读取数据后需进行的初始化
     /// </summary>

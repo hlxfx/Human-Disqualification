@@ -7,4 +7,6 @@ using System;
 public class State 
 {
     public virtual void Update(Animator ani) { }
+
+    public virtual void OnAutoMove(Animator ani,List<Vector3> dir){ }
 }

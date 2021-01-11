@@ -77,8 +77,8 @@ public class GridMap
 
     public List<Vector3> CalculateRoad(Vector3 start, Vector3 end)
     {
-        start = start + offset - new Vector3(gridSize / 2, gridSize / 2, 0);
-        end = end + offset - new Vector3(gridSize / 2, gridSize / 2, 0);
+        start = start + offset;
+        end = end + offset;
         //将目标点映射到格子地图的中的x，y坐标，再转换到格子列表中  grids[int num]
         int targetNum = Mathf.FloorToInt(Mathf.Abs(end.x / gridSize)) * curMapH + Mathf.CeilToInt(Mathf.Abs(end.y / gridSize));
         //是否在地图内

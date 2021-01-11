@@ -37,4 +37,9 @@ public class PlayerManager : IScript
     {
         return player;
     }
+
+    public PlayerState GetState()
+    {
+        return playerState;
+    }
 }

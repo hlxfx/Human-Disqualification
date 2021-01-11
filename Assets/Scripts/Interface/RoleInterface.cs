@@ -12,5 +12,17 @@ public static class RoleInterface
         }
         return null;
     }
-    
+
+    public static void OnAutoMove(Animator ani,List<Vector3> dir)
+    {
+        GameManager.instance.roleManager.GetPlayerState().curState.OnAutoMove(ani, dir);
+        return;
+    }
+
+    public static void SetPlayerState(States state)
+    {
+        GameManager.instance.roleManager.GetPlayerState().SetState(state);
+    }
+
+
 }
