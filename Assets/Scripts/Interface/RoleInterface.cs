@@ -19,6 +19,11 @@ public static class RoleInterface
         return;
     }
 
+    public static States GetPlayerState()
+    {
+        return GameManager.instance.roleManager.GetPlayerState().GetState();
+    }
+
     public static void SetPlayerState(States state)
     {
         GameManager.instance.roleManager.GetPlayerState().SetState(state);

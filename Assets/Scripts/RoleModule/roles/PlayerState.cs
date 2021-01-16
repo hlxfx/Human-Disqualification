@@ -83,7 +83,7 @@ public class PlayerState :IScript
         return true;
     }
 
-    public States GetState(States state)
+    public States GetState()
     {
         return _state;
     }

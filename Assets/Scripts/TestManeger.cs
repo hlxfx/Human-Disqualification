@@ -26,7 +26,10 @@ public class TestManeger : MonoBehaviour
             offset = new Vector3(player.GetComponent<BoxCollider2D>().offset.x, player.GetComponent<BoxCollider2D>().offset.y, 0f);
             target.transform.position = Camera.main.ScreenToWorldPoint(GameInput.GetMousePos());
             List<Vector3> path = MapInterface.FindPath(player.transform.position + offset, target.transform.position);
-            RoleInterface.SetPlayerState(States.autoMove);
+            if(RoleInterface.GetPlayerState() != States.autoMove)
+            {
+                RoleInterface.SetPlayerState(States.autoMove);
+            }
             RoleInterface.OnAutoMove(player.GetComponent<Animator>(), path);
         }
     }
