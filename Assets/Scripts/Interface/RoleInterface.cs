@@ -13,9 +13,9 @@ public static class RoleInterface
         return null;
     }
 
-    public static void OnAutoMove(Animator ani,List<Vector3> dir)
+    public static void OnAutoMove(Animator ani,List<Vector3> dir,float offset)
     {
-        GameManager.instance.roleManager.GetPlayerState().curState.OnAutoMove(ani, dir);
+        GameManager.instance.roleManager.GetPlayerState().curState.OnAutoMove(ani, dir, offset);
         return;
     }
 

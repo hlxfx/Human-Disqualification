@@ -24,7 +24,7 @@ public class MapManager :IMassageInterface
         gridParent = GameObject.Find("Grid");
     }
     
-    public void LoadMap(string mapName)
+    public bool LoadMap(string mapName)
     {
         MapBase map = allMaps.Find(v => v.mapName == mapName);
         if (map == null)
@@ -34,7 +34,7 @@ public class MapManager :IMassageInterface
             if (mapdate == null)
             {
                 Debug.LogError("该地图信息不存在");
-                return;
+                return false;
             }
 
             if (curMap != null && curMap.GetMapObject()!= null) 
@@ -60,19 +60,23 @@ public class MapManager :IMassageInterface
         BoxCollider2D[] obstacle = curMap.GetMapObject().GetComponentsInChildren<BoxCollider2D>();
         gridMap.CreatGrid((int)temp, (int)temp2, gridParent.transform, obstacle);
         //**************
+        return true;
     }
 
     public bool HandleMessage(int id, string mapName, GameObject param2)
     {
         if (mapName != null)
         {
-            LoadMap(mapName);
-        }
-        if (id == MassageList.loadMap)
-        {
-            Transform transform = RoleInterface.GetPlayer().transform;
-            SetPos(transform, param2);
-            CameraInterface.SetCameraPos(transform.position);
+            if (LoadMap(mapName)) 
+            {
+                if (id == MassageList.loadMap)
+                {
+                    Transform transform = RoleInterface.GetPlayer().transform;
+                    SetPos(transform, param2);
+                    CameraInterface.SetCameraPos(transform.position);
+                }
+                return false;
+            }
         }
         return false;
     }
@@ -90,6 +94,7 @@ public class MapManager :IMassageInterface
         }
         else
         {
+            Debug.Log("未设置传送位置!");
             target.position = curMap.GetMapObject().transform.Find("rootPos").position;
         }
     }

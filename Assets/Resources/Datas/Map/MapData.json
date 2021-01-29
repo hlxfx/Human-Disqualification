@@ -50,6 +50,90 @@
             "itemList": [
 
             ]
+        },
+        {
+            "mapName": "administrationRoom",
+            "mapID": 10006,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "artRoom",
+            "mapID": 10007,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "computerRoom",
+            "mapID": 10008,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "conferenceRoom",
+            "mapID": 10009,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "customerServiceRoom",
+            "mapID": 10010,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "developRoom",
+            "mapID": 10011,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "exploreRoom",
+            "mapID": 10012,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "gameRoom",
+            "mapID": 10013,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "marketRoom",
+            "mapID": 10014,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "musicRoom",
+            "mapID": 10015,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "planRoom",
+            "mapID": 10016,
+            "itemList": [
+
+            ]
+        },
+        {
+            "mapName": "readingRoom",
+            "mapID": 10017,
+            "itemList": [
+
+            ]
         }
     ]
 }

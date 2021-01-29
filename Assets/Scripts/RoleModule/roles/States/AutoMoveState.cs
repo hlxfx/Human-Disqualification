@@ -17,6 +17,7 @@ public class AutoMoveState : State
     public float speedY = 0f;
 
     private List<Vector3> path;
+    private float offset;
 
     public override void Update(Animator ani)
     {
@@ -32,17 +33,31 @@ public class AutoMoveState : State
         {
             ani.SetBool("IsMove", true);
             Vector3 dir = path[0] - ani.gameObject.transform.position;
-            if(Mathf.Abs(dir.x) <0.01f && Mathf.Abs(dir.y) < 0.01f)
+            if(Mathf.Abs(dir.x) < offset && Mathf.Abs(dir.y) < offset)
             {
                 path.RemoveAt(0);
                 return;
             }
 
-            speedX += Mathf.Abs(dir.x) < .01f ? 0 : dir.x;
-            speedY += Mathf.Abs(dir.y) < .01f ? 0 : dir.y;
+            speedX += dir.x;
+            speedY += dir.y;
 
-            ani.SetFloat("ValX", (Mathf.Abs(dir.x) < .01f ? 0 : dir.x < 0 ? -1 : 1) * (Mathf.Abs(speedX) > .6f ? .6f : Mathf.Abs(speedX)));
-            ani.SetFloat("ValY", (Mathf.Abs(dir.y) < .01f ? 0 : dir.y < 0 ? -1 : 1) * (Mathf.Abs(speedY) > .6f ? .6f : Mathf.Abs(speedY)));
+            if (Mathf.Abs(dir.x) < offset)
+            {
+                speedX = 0f;
+            }
+            else
+            {
+                ani.SetFloat("ValX", (dir.x < 0 ? -1 : 1) * (Mathf.Abs(speedX) > .6f ? .6f : Mathf.Abs(speedX)));
+            }
+            if (Mathf.Abs(dir.y) < offset)
+            {
+                speedY = 0f;
+            }
+            else
+            {
+                ani.SetFloat("ValY", (dir.y < 0 ? -1 : 1) * (Mathf.Abs(speedY) > .6f ? .6f : Mathf.Abs(speedY)));
+            }
 
 
             if (GameInput.GetKey(KeyCode.LeftShift) && canRun)
@@ -66,9 +81,10 @@ public class AutoMoveState : State
         }
     }
 
-    public override void OnAutoMove(Animator ani, List<Vector3> dir)
+    public override void OnAutoMove(Animator ani, List<Vector3> dir , float offset)
     {
         path = dir;
+        this.offset = offset;
     }
 
     private void Run(Animator ani)

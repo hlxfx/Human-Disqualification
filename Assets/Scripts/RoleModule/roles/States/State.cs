@@ -8,5 +8,5 @@ public class State
 {
     public virtual void Update(Animator ani) { }
 
-    public virtual void OnAutoMove(Animator ani,List<Vector3> dir){ }
+    public virtual void OnAutoMove(Animator ani,List<Vector3> dir,float offset){ }
 }
