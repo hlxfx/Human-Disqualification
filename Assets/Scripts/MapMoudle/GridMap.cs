@@ -81,19 +81,21 @@ public class GridMap
         end = end + offset;
         //将目标点映射到格子地图的中的x，y坐标，再转换到格子列表中  grids[int num]
         int targetNum = Mathf.FloorToInt(Mathf.Abs(end.x / gridSize)) * curMapH + Mathf.CeilToInt(Mathf.Abs(end.y / gridSize));
+        targetNum -= 1; //因为算出来的是在list中的位置 要-1转为下标
         //是否在地图内
         if (grids[targetNum].gameObject == null || !grids[targetNum].gameObject.activeSelf)
         {
-            Debug.Log("目标点不在地图内!");
+            Debug.Log("目标点不在地图内! num" + targetNum);
             return null;
         }
 
         //是不是阻挡点
         if(grids[targetNum].gameObject.layer == (int)NodeType.unWalk)
         {
-            Debug.Log("目标点不可抵达!");
+            Debug.Log("目标点不可抵达! num = " + targetNum);
             return null;
         }
+        Debug.Log("目标点! num" + targetNum);
 
         int startX = Mathf.FloorToInt(Mathf.Abs(start.x / gridSize));
         int startY = Mathf.CeilToInt(Mathf.Abs(start.y / gridSize));
@@ -169,14 +171,14 @@ public class GridMap
     {
         if (num < 0 || grids[num].gameObject == null || !grids[num].gameObject.activeSelf)
         {
-            Debug.Log(num+ "点不在地图内");
+            //Debug.Log(num+ "点不在地图内");
             return;
         }
 
         //是不是阻挡点
         if (grids[num].gameObject.layer == (int)NodeType.unWalk)
         {
-            Debug.Log(num + "点是阻挡点!");
+            //Debug.Log(num + "点是阻挡点!");
             return;
         }
 

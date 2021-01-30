@@ -18,6 +18,7 @@ public class AutoMoveState : State
 
     private List<Vector3> path;
     private float offset;
+    private Vector3 posOffset;
 
     public override void Update(Animator ani)
     {
@@ -32,7 +33,7 @@ public class AutoMoveState : State
         if (path.Count > 0)
         {
             ani.SetBool("IsMove", true);
-            Vector3 dir = path[0] - ani.gameObject.transform.position;
+            Vector3 dir = path[0] - (ani.gameObject.transform.position + posOffset);
             if(Mathf.Abs(dir.x) < offset && Mathf.Abs(dir.y) < offset)
             {
                 path.RemoveAt(0);
@@ -85,6 +86,7 @@ public class AutoMoveState : State
     {
         path = dir;
         this.offset = offset;
+        posOffset = new Vector3(ani.GetComponent<BoxCollider2D>().offset.x, ani.GetComponent<BoxCollider2D>().offset.y, 0f);
     }
 
     private void Run(Animator ani)
