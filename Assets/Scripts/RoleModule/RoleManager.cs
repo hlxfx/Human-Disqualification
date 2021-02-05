@@ -8,6 +8,8 @@ public class RoleManager : IScript
 {
     [SerializeField]
     private PlayerManager playerManager;
+    [SerializeField]
+    private EnemyManager enemyManager;
     private GameObject gameObject;
     public bool haveRole;
     
@@ -21,6 +23,7 @@ public class RoleManager : IScript
     public void LoadRole()
     {
         playerManager = new PlayerManager(gameObject);
+        enemyManager = new EnemyManager(gameObject);
         haveRole = true;
     }
 
@@ -34,6 +37,11 @@ public class RoleManager : IScript
         return playerManager.GetState();
     }
 
+    public EnemyManager GetEnemyManager()
+    {
+        return enemyManager;
+    }
+
     /// <summary>
     /// 从存档中读取数据后需进行的初始化
     /// </summary>
@@ -42,6 +50,7 @@ public class RoleManager : IScript
         if (haveRole)
         {
             playerManager.Start();
+            enemyManager.Start();
 
             //存档中的位置，或初始位置
             GameManager.instance.rootMassageNode.SendEvent(MassageList.loadMap, "Floor_1");
@@ -54,6 +63,7 @@ public class RoleManager : IScript
         if (haveRole)
         {
             playerManager.Update();
+            enemyManager.Update();
         }
     }
 }

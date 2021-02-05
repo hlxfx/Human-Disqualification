@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15697456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8853425, y: -1.7220241, z: -43.541016}
+  m_LocalPosition: {x: -0.8853425, y: 2.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -379,8 +379,10 @@ MonoBehaviour:
     playerManager:
       playerState:
         ani: {fileID: 0}
-        _state: 0
+        curState:
+          _state: 0
         moveState:
+          _state: 0
           deltaSpeed: 0.6
           canRun: 1
           runTime: 5

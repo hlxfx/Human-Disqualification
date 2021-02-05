@@ -28,7 +28,7 @@ public class GridMap
     {
         curMapH = mapH;
         curMapW = mapW;
-        offset = new Vector3(mapW / 2 * gridSize, mapH / 2 * gridSize, 0);
+        offset = new Vector3((float)mapW / 2 * gridSize, (float)mapH / 2 * gridSize, 0);
         ClearGrids();
         int temp = 0;
         //x,y便是格子在格子地图中的x，y坐标

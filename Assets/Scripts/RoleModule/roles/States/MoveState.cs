@@ -14,6 +14,11 @@ public class MoveState : State
     public float runRestTime = 3f;
     public float runSpeed = 2.5f;      //为普通速度的多少倍
 
+    public MoveState()
+    {
+        _state = States.move;
+    }
+
     // Update is called once per frame
     public override void Update(Animator ani)
     {

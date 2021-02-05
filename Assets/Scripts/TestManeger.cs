@@ -14,7 +14,6 @@ public class TestManeger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -32,6 +31,21 @@ public class TestManeger : MonoBehaviour
                 path.RemoveAt(0);
                 RoleInterface.OnAutoMove(player.GetComponent<Animator>(), path, 0.01f);
             }
+        }
+
+        if (GameInput.GetKey(KeyCode.R))
+        {
+            GameManager.instance.roleManager.GetEnemyManager().TestSetPos(target.transform);
+        }
+
+        if (GameInput.GetKey(KeyCode.F))
+        {
+            GameManager.instance.roleManager.GetEnemyManager().TestSetPos();
+        }
+
+        if (GameInput.GetKey(KeyCode.C))
+        {
+            GameManager.instance.roleManager.GetEnemyManager().CreatEnemy("player");
         }
     }
 

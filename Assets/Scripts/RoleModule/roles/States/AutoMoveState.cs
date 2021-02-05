@@ -20,6 +20,11 @@ public class AutoMoveState : State
     private float offset;
     private Vector3 posOffset;
 
+    public AutoMoveState()
+    {
+        _state = States.autoMove;
+    }
+
     public override void Update(Animator ani)
     {
         //curSpeed = 

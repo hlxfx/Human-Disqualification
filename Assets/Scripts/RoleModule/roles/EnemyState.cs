@@ -4,13 +4,11 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class PlayerState :IScript
+public class EnemyState : IScript
 {
-   
     [SerializeField]
     private Animator ani;
     private GameObject gameObject;
-
     [SerializeField]
     public State curState;
 
@@ -22,7 +20,7 @@ public class PlayerState :IScript
     private AutoMoveState autoMove;
 
 
-    public PlayerState(GameObject gameObject)
+    public EnemyState(GameObject gameObject)
     {
         this.gameObject = gameObject;
         moveState = new MoveState();
@@ -32,14 +30,16 @@ public class PlayerState :IScript
         autoMove = new AutoMoveState();
         SetState(States.move);
         curState = moveState;
+        ani = gameObject.GetComponent<Animator>();
     }
 
     public void Start()
     {
-        ani = gameObject.GetComponent<Animator>();
-    }
+    }                                                              
 
-    public void Update() {
+    public void Update()
+    {
+
         if (!gameObject.activeSelf)
         {
             OnDisEnable();
@@ -48,9 +48,9 @@ public class PlayerState :IScript
         {
             curState.Update(ani);
         }
-    }
+    }                                                                
 
-    public bool SetState(States state)
+    public bool SetState(States state) 
     {
         switch (state)
         {
@@ -76,6 +76,11 @@ public class PlayerState :IScript
     public States GetState()
     {
         return curState._state;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 
     private void OnDisEnable()
