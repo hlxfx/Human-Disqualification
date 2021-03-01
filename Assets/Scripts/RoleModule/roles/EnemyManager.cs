@@ -36,7 +36,7 @@ public class EnemyManager : IScript
 
     public bool CreatEnemy(string name)
     {
-        GameObject enemyPrefab = Resources.Load<GameObject>("prefabs/player/" + name);
+        GameObject enemyPrefab = GeneraMethod.LoadGameObject("prefabs/player/" + name);
         if (enemyPrefab)
         {
             enemyPrefab = GameObject.Instantiate(enemyPrefab) as GameObject;

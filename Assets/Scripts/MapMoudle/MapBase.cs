@@ -21,26 +21,19 @@ public class MapBase
         mapName = mapData.mapName;
         items = mapData.itemList;
 
-        map = Instantiate("prefabs/map/"+ mapName);
-        map.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("pic/map/" + mapName);
+        map = GeneraMethod.LoadGameObject("prefabs/map/" + mapName);
+        map.GetComponent<SpriteRenderer>().sprite = GeneraMethod.LoadSprite("pic/map/" + mapName);
         map.transform.SetParent(gameObject.transform);
 
         foreach (var item in items)
         {
             if (item.isShow)
             {
-                GameObject temp = Instantiate("prefabs/items/" + item.itemName);
+                GameObject temp = GeneraMethod.LoadGameObject("prefabs/items/" + item.itemName);
                 temp.transform.SetParent(map.transform);
                 itemObjects.Add(temp);
             }
         }
-    }
-
-    private GameObject Instantiate(string path)
-    {
-        GameObject temp = Resources.Load<GameObject>(path);
-        temp = GameObject.Instantiate(temp);
-        return temp;
     }
 
     public GameObject GetMapObject()

@@ -13,7 +13,7 @@ public class PlayerManager : IScript
 
     public PlayerManager(GameObject gameObject)
     {
-        player =  Resources.Load<GameObject>("prefabs/player/player");
+        player =  GeneraMethod.LoadGameObject("prefabs/player/player");
         player = GameObject.Instantiate(player) as GameObject;
         player.transform.SetParent(gameObject.transform);
         player.GetComponent<SpriteRenderer>().sortingOrder = 9;

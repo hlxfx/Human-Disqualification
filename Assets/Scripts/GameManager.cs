@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public MassageNode rootMassageNode;
     public RoleManager roleManager;
     public MapManager mapManager;
+    public UIManager uIManager;
     public CameraMove cameraMove;
 
     private void Awake()
@@ -23,8 +24,9 @@ public class GameManager : MonoBehaviour
     {
         cameraMove = new CameraMove();
         rootMassageNode = new MassageNode(gameObject);
-        mapManager = new MapManager(GameObject.Find("Canvas/map"));
-        roleManager = new RoleManager(GameObject.Find("Canvas/map/role"));
+        mapManager = new MapManager(GameObject.Find("scene/map"));
+        roleManager = new RoleManager(GameObject.Find("scene/map/role"));
+        uIManager = new UIManager(GameObject.Find("ui"));
     }
 
     // Start is called before the first frame update
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         roleManager.Start();
         cameraMove.Start();
+        uIManager.Start();
     }
 
     // Update is called once per frame
@@ -39,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         roleManager.Update();
         cameraMove.Update();
+        uIManager.Update();
     }
 
     private void FixedUpdate()

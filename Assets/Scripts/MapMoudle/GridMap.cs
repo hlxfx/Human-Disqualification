@@ -14,14 +14,14 @@ public class GridMap
     public List<Grid> closeList = new List<Grid>();
     public List<Grid> grids = new List<Grid>();
     public float gridSize = 0.16f;
-    private Object gridPrefab;
+    private GameObject gridPrefab;
     private Vector3 offset;
     private int curMapH;
     private int curMapW;
 
     public GridMap()
     {
-        gridPrefab = Resources.Load("prefabs/grid");
+        gridPrefab = GeneraMethod.LoadGameObject("prefabs/grid");
     }
 
     public void CreatGrid(int mapW, int mapH ,Transform parent , BoxCollider2D[] obstacles = null)
@@ -38,7 +38,7 @@ public class GridMap
             {
                 if(grids.Count < temp + 1)
                 {
-                    grids.Add(new Grid(GameObject.Instantiate(gridPrefab) as GameObject , temp));
+                    grids.Add(new Grid(gridPrefab, temp));
                 }
                 else
                 {

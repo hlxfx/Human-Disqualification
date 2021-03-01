@@ -33,17 +33,17 @@ public class TestManeger : MonoBehaviour
             }
         }
 
-        if (GameInput.GetKey(KeyCode.R))
+        if (GameInput.GetKeyDown(KeyCode.R))
         {
             GameManager.instance.roleManager.GetEnemyManager().TestSetPos(target.transform);
         }
 
-        if (GameInput.GetKey(KeyCode.F))
+        if (GameInput.GetKeyDown(KeyCode.F))
         {
             GameManager.instance.roleManager.GetEnemyManager().TestSetPos();
         }
 
-        if (GameInput.GetKey(KeyCode.C))
+        if (GameInput.GetKeyDown(KeyCode.C))
         {
             GameManager.instance.roleManager.GetEnemyManager().CreatEnemy("player");
         }
@@ -62,7 +62,4 @@ public class TestManeger : MonoBehaviour
             Gizmos.DrawWireCube(temp[i].bounds.center, new Vector3(0.16f, 0.16f, 0));
         }
     }
-
-
-
 }

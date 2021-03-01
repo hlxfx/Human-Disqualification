@@ -10,7 +10,7 @@ public class MapMassageFromJson
 
     public static MapDataList LoadMapDataJson(string name)
     {
-        TextAsset jsonText = Resources.Load<TextAsset>(m_JsonPath + name);
+        TextAsset jsonText = GeneraMethod.LoadTextAsset(m_JsonPath + name);
         MapDataList jsonTemp = new MapDataList();
         jsonTemp = JsonUtility.FromJson<MapDataList>(jsonText.text);
         return jsonTemp;

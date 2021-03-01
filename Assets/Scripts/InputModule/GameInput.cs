@@ -13,8 +13,12 @@ public static class GameInput
 
     public static bool GetKey(KeyCode operate)
     {
-        bool axis = Input.GetKey(operate);
-        return axis;
+        return Input.GetKey(operate);
+    }
+
+    public static bool GetKeyDown(KeyCode operate)
+    {
+        return Input.GetKeyDown(operate);
     }
 
     public static Vector3 GetMousePos()
