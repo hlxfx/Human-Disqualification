@@ -1,0 +1,54 @@
+{
+    "monster": [
+        {
+            "id": 1,
+            "name": "test1",
+            "hp": 100,
+            "mp": 100,
+            "behaviours": {
+                "rootNodeName" : "root",
+                "rootNodeType" : 1,
+                "nodes": [
+                    {
+                        "parentNodeName" : "root",
+                        "controlNodeName": "FindTarget",
+                        "controlNodeType": 1,
+                        "priority" : 0,
+                        "nodes": [
+                            "NormalAttack",
+                            "SkillAttack"
+                        ]
+                    },
+                    {
+                        "parentNodeName" : "root",
+                        "controlNodeName": "BeAttacked",
+                        "controlNodeType": 1,
+                        "priority" : 1,
+                        "nodes": [
+                            "Injure"
+                        ]
+                    },
+                    {
+                        "parentNodeName" : "BeAttacked",
+                        "controlNodeName": "DefenseAction",
+                        "controlNodeType": 2,
+                        "priority" : 1,
+                        "nodes": [
+                            "counterattack"
+                        ]
+                    },
+                    {
+                        "parentNodeName" : "DefenseAction",
+                        "controlNodeName": "DefenseType",
+                        "controlNodeType": 1,
+                        "priority" : 1,
+                        "nodes": [
+                            "Dodge",
+                            "Block"
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

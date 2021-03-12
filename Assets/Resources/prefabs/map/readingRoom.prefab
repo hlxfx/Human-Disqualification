@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8218415325166455499}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: rootPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7899227600736073769}
   - component: {fileID: 2238995311269106507}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Floor_1
   m_TagString: door
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8163872732664004566}
   - component: {fileID: 1762791222030273527}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: downWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153515263425736227}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7210216849628154093}
   - component: {fileID: 9218909328434679629}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: upWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8417631019313719603}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3211484171344528945}
   - component: {fileID: 2342203749197934596}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: leftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6315813462029626082}
   - component: {fileID: 6987013516232717874}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rightWall_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2012952274098765191}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: desPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2943462986110471191}
   - component: {fileID: 515078844846089283}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: leftWall_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8751797997793010051}
   - component: {fileID: 27649831368290834}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: downWall_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7290201055692292969}
   - component: {fileID: 7290201055692292968}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: readingRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5873856043395357949}
   - component: {fileID: 8697973248334033976}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

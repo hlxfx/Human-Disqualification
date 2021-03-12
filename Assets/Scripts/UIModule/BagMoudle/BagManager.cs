@@ -29,6 +29,7 @@ public class BagManager
             slot.name = "slot" + i;
             slots.Add(slot);
         }
+        GameObject.DestroyImmediate(prefab);
     }
 
     public void OpenBag()
