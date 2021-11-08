@@ -33,7 +33,7 @@ public class TestManeger : MonoBehaviour
             }
         }
 
-        if (GameInput.GetKeyDown(KeyCode.R))
+        /*if (GameInput.GetKeyDown(KeyCode.R))
         {
             GameManager.instance.roleManager.GetEnemyManager().TestSetPos(target.transform);
         }
@@ -46,7 +46,7 @@ public class TestManeger : MonoBehaviour
         if (GameInput.GetKeyDown(KeyCode.C))
         {
             GameManager.instance.roleManager.GetEnemyManager().CreatEnemy("player");
-        }
+        }*/
     }
 
     void OnDrawGizmosSelected()

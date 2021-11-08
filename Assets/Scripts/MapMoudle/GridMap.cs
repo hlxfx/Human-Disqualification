@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public enum NodeType
@@ -38,7 +39,7 @@ public class GridMap
             {
                 if(grids.Count < temp + 1)
                 {
-                    grids.Add(new Grid(gridPrefab, temp));
+                    grids.Add(new Grid(GameObject.Instantiate(gridPrefab), temp));
                 }
                 else
                 {
