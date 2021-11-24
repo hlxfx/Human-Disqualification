@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: test2
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 0.1
+    packables: []
+    totalSpriteSurfaceArea: 0
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 4343727234628468602, guid: b09ac5a53bb5d7b4280a87e98293f71d,
+    type: 2}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 76c9de30a80f1d540bdd497778d1512f, type: 3}
+  - {fileID: 21300000, guid: 6a963f5128b28d34582f1faff654f930, type: 3}
+  - {fileID: 21300000, guid: dc4989e175a792246ba085971758919f, type: 3}
+  - {fileID: 21300000, guid: 238ac5f13fa85de43b22b6713a772ca1, type: 3}
+  - {fileID: 21300000, guid: 95d3d233025b08947be4c58c94753d20, type: 3}
+  - {fileID: 21300000, guid: 42dcda334933ace40b53e240a96e1664, type: 3}
+  - {fileID: 21300000, guid: 35501854da1df094b853f92c6e065a99, type: 3}
+  - {fileID: 21300000, guid: a0172d952648fd1469a2605000795d6f, type: 3}
+  - {fileID: 21300000, guid: 552235072f4470945a717fa3b175e82c, type: 3}
+  - {fileID: 21300000, guid: 36b6bd27fb13dad42a7e153208367027, type: 3}
+  - {fileID: 21300000, guid: 55578b479c11b26478203b7be579f1d3, type: 3}
+  - {fileID: 21300000, guid: 524eef0807221fe49a6f8a1229b2221c, type: 3}
+  - {fileID: 21300000, guid: 27d15788ffc9a8e46ad476fc0494e931, type: 3}
+  - {fileID: 21300000, guid: 7c4849b8747c1a34987aa3ed76f0573c, type: 3}
+  - {fileID: 21300000, guid: feb10ec9e4cf59c4f8ad94c85150b495, type: 3}
+  - {fileID: 21300000, guid: ac897b4dfd3daed468a2b108eddb973e, type: 3}
+  - {fileID: 21300000, guid: 46f106de5aa1f5946875d5a6449838bf, type: 3}
+  - {fileID: 21300000, guid: e8815c1fe18c444489657b57363b2bca, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - artRoom
+  - readingRoom
+  - planRoom
+  - conferenceRoom
+  - developRoom
+  - computerRoom
+  - teaRoom
+  - administrationRoom
+  - marketRoom
+  - elevator
+  - maleToiletRoom
+  - gameRoom
+  - toiletRoom
+  - exploreRoom
+  - customerServiceRoom
+  - Floor_1
+  - famaleToiletRoom
+  - musicRoom
+  m_Tag: test
+  m_IsVariant: 1

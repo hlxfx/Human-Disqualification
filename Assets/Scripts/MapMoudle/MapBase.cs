@@ -22,7 +22,7 @@ public class MapBase
         items = mapData.itemList;
 
         map = GeneraMethod.LoadGameObject("prefabs/map/" + mapName);
-        map.GetComponent<SpriteRenderer>().sprite = GeneraMethod.LoadSprite("pic/map/" + mapName);
+        //map.GetComponent<SpriteRenderer>().sprite = GeneraMethod.LoadSprite("pic/map/" + mapName);
         map.transform.SetParent(gameObject.transform);
 
         foreach (var item in items)
